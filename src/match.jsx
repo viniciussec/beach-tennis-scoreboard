@@ -6,7 +6,10 @@ class Match extends Component {
     title: "Open DC de Beach Tennis",
     // Placeholder temporario para o timer:
     timer: "00:00:00",
-    names: ["Fernando Trinta/Lincoln Rocha", "João Paulo Pordeus/Paulo Rêgo"],
+    names: [
+      "Fernando Trinta / Lincoln Rocha",
+      "João Paulo Pordeus / Paulo Rêgo",
+    ],
 
     // Placar dos Sets
     setScore: [{ count: 0 }, { count: 0 }],
@@ -208,31 +211,45 @@ class Match extends Component {
         <div className="p-3 text-white bg-green-800 border border-white rounded-md drop-shadow-md">
           {this.state.timer}
         </div>
-
-        <div className="flex flex-col items-center justify-center p-4 space-y-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
-          <div className="flex items-center justify-between">
-            <div className="inline text-right">{this.state.names[0]}</div>
-            <Set
-              setGames={this.state.setGames}
-              currentSet={this.state.currentSet}
-              game={this.state.game[0]}
-              onScore={this.handleScoredPoint}
-              id={0}
-              gameOver={this.state.gameOver}
-              winner={this.state.winner}
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="inline text-right">{this.state.names[1]}</div>
-            <Set
-              setGames={this.state.setGames}
-              currentSet={this.state.currentSet}
-              game={this.state.game[1]}
-              onScore={this.handleScoredPoint}
-              id={1}
-              gameOver={this.state.gameOver}
-              winner={this.state.winner}
-            />
+        <div>
+          <div className="p-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <div className="">{this.state.names[0]}</div>
+                  </td>
+                  <td>
+                    <Set
+                      setGames={this.state.setGames}
+                      currentSet={this.state.currentSet}
+                      game={this.state.game[0]}
+                      onScore={this.handleScoredPoint}
+                      id={0}
+                      gameOver={this.state.gameOver}
+                      winner={this.state.winner}
+                    />
+                  </td>
+                </tr>
+                <tr className="h-2" />
+                <tr>
+                  <td>
+                    <div className="">{this.state.names[1]}</div>
+                  </td>
+                  <td>
+                    <Set
+                      setGames={this.state.setGames}
+                      currentSet={this.state.currentSet}
+                      game={this.state.game[1]}
+                      onScore={this.handleScoredPoint}
+                      id={1}
+                      gameOver={this.state.gameOver}
+                      winner={this.state.winner}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

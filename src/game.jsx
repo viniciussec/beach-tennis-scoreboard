@@ -27,7 +27,15 @@ class Game extends Component {
             Vencedor
           </button>
         );
-      else elem = <span></span>;
+      else
+        elem = (
+          <button
+            className="p-2 text-white bg-red-600 rounded-md"
+            style={{ textAlign: "right", display: "inline", marginLeft: 50 }}
+          >
+            Perdedor
+          </button>
+        );
     }
     return (
       <>

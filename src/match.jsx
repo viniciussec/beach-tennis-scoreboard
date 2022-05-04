@@ -200,43 +200,41 @@ class Match extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <div className="flex justify-center w-full p-2">
-            <div className="p-4 text-xl font-bold text-white bg-blue-500 rounded-md">
-              {this.state.title}
-            </div>
-          </div>
-
-          <div className="flex justify-center w-full">
-            <div className="p-3 text-white bg-green-800 rounded-md">
-              {this.state.timer}
-            </div>
-          </div>
+      <div className="flex flex-col items-center justify-center p-1 py-4 m-5 space-y-4 bg-gray-100 border-2 border-gray-300 rounded-md">
+        <div className="p-4 text-xl font-bold text-white bg-blue-500 border-2 border-white rounded-md drop-shadow-md">
+          {this.state.title}
         </div>
 
-        <div className="flex justify-center w-full"></div>
-        <div className="inline text-right">{this.state.names[0]}</div>
-        <Set
-          setGames={this.state.setGames}
-          currentSet={this.state.currentSet}
-          game={this.state.game[0]}
-          onScore={this.handleScoredPoint}
-          id={0}
-          gameOver={this.state.gameOver}
-          winner={this.state.winner}
-        />
-        <p></p>
-        <div className="inline text-right">{this.state.names[1]}</div>
-        <Set
-          setGames={this.state.setGames}
-          currentSet={this.state.currentSet}
-          game={this.state.game[1]}
-          onScore={this.handleScoredPoint}
-          id={1}
-          gameOver={this.state.gameOver}
-          winner={this.state.winner}
-        />
+        <div className="p-3 text-white bg-green-800 border border-white rounded-md drop-shadow-md">
+          {this.state.timer}
+        </div>
+
+        <div className="flex flex-col items-center justify-center p-4 space-y-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
+          <div className="flex items-center justify-between">
+            <div className="inline text-right">{this.state.names[0]}</div>
+            <Set
+              setGames={this.state.setGames}
+              currentSet={this.state.currentSet}
+              game={this.state.game[0]}
+              onScore={this.handleScoredPoint}
+              id={0}
+              gameOver={this.state.gameOver}
+              winner={this.state.winner}
+            />
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="inline text-right">{this.state.names[1]}</div>
+            <Set
+              setGames={this.state.setGames}
+              currentSet={this.state.currentSet}
+              game={this.state.game[1]}
+              onScore={this.handleScoredPoint}
+              id={1}
+              gameOver={this.state.gameOver}
+              winner={this.state.winner}
+            />
+          </div>
+        </div>
       </div>
     );
   }

@@ -215,11 +215,15 @@ class Match extends Component {
           <div className="p-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
             <table>
               <tbody>
-                <tr>
+                <tr className="border-b-2">
                   <td>
+                    {/* BOLA DE TÊNIS */}
+                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                  </td>
+                  <td className="p-2 ">
                     <div className="">{this.state.names[0]}</div>
                   </td>
-                  <td>
+                  <td className="p-2">
                     <Set
                       setGames={this.state.setGames}
                       currentSet={this.state.currentSet}
@@ -231,12 +235,15 @@ class Match extends Component {
                     />
                   </td>
                 </tr>
-                <tr className="h-2" />
                 <tr>
                   <td>
+                    {/* BOLA DE TÊNIS */}
+                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                  </td>
+                  <td className="p-2">
                     <div className="">{this.state.names[1]}</div>
                   </td>
-                  <td>
+                  <td className="p-2">
                     <Set
                       setGames={this.state.setGames}
                       currentSet={this.state.currentSet}

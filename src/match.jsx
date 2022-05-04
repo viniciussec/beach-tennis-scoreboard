@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import Set from "./set";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 
 class Match extends Component {
   state = {
     title: "Open DC de Beach Tennis",
     // Placeholder temporario para o timer:
     timer: "00:00:00",
-    names: ["Fernando Trinta/Lincoln Rocha", "João Paulo Pordeus/Paulo Rêgo"],
+    names: [
+      "Fernando Trinta / Lincoln Rocha",
+      "João Paulo Pordeus / Paulo Rêgo",
+    ],
 
     // Placar dos Sets
     setScore: [{ count: 0 }, { count: 0 }],
@@ -116,8 +116,7 @@ class Match extends Component {
   };
 
   checkSetWin = (id) => {
-    const { setGames, setScore, currentSet, tieBreak, superTieBreak } =
-      this.state;
+    const { setGames, setScore, currentSet } = this.state;
     // O que ocorreu com a vitoria desse game?
     // Se ficou 6 games a 6:
     if (
@@ -148,7 +147,7 @@ class Match extends Component {
   };
 
   handleSetWin = (id) => {
-    const { setScore, gameOver, winner, names } = this.state;
+    const { setScore, winner } = this.state;
     let current = this.state.currentSet;
     let gOver = this.state.gameOver;
     const setSum = setScore[0].count + setScore[1].count;
@@ -203,40 +202,64 @@ class Match extends Component {
   };
 
   render() {
-    const inLineL = { textAlign: "right", display: "inline" };
     return (
-      <>
-        <div>
-          <div style={inLineL}>{this.state.title}</div>
-          <div
-            style={{ textAlign: "right", marginLeft: 500, display: "inline" }}
-          >
-            {this.state.timer}
-          </div>
+      <div className="flex flex-col items-center justify-center p-1 py-4 m-5 space-y-4 bg-gray-100 border-2 border-gray-300 rounded-md">
+        <div className="p-4 text-xl font-bold text-white bg-blue-500 border-2 border-white rounded-md drop-shadow-md">
+          {this.state.title}
         </div>
 
-        <div style={inLineL}>{this.state.names[0]}</div>
-        <Set
-          setGames={this.state.setGames}
-          currentSet={this.state.currentSet}
-          game={this.state.game[0]}
-          onScore={this.handleScoredPoint}
-          id={0}
-          gameOver={this.state.gameOver}
-          winner={this.state.winner}
-        />
-        <p></p>
-        <div style={inLineL}>{this.state.names[1]}</div>
-        <Set
-          setGames={this.state.setGames}
-          currentSet={this.state.currentSet}
-          game={this.state.game[1]}
-          onScore={this.handleScoredPoint}
-          id={1}
-          gameOver={this.state.gameOver}
-          winner={this.state.winner}
-        />
-      </>
+        <div className="p-3 text-white bg-green-800 border border-white rounded-md drop-shadow-md">
+          {this.state.timer}
+        </div>
+        <div>
+          <div className="p-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
+            <table>
+              <tbody>
+                <tr className="border-b-2">
+                  <td>
+                    {/* BOLA DE TÊNIS */}
+                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                  </td>
+                  <td className="p-2 ">
+                    <div className="">{this.state.names[0]}</div>
+                  </td>
+                  <td className="p-2">
+                    <Set
+                      setGames={this.state.setGames}
+                      currentSet={this.state.currentSet}
+                      game={this.state.game[0]}
+                      onScore={this.handleScoredPoint}
+                      id={0}
+                      gameOver={this.state.gameOver}
+                      winner={this.state.winner}
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    {/* BOLA DE TÊNIS */}
+                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                  </td>
+                  <td className="p-2">
+                    <div className="">{this.state.names[1]}</div>
+                  </td>
+                  <td className="p-2">
+                    <Set
+                      setGames={this.state.setGames}
+                      currentSet={this.state.currentSet}
+                      game={this.state.game[1]}
+                      onScore={this.handleScoredPoint}
+                      id={1}
+                      gameOver={this.state.gameOver}
+                      winner={this.state.winner}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     );
   }
 }

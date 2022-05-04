@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import Set from "./set";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min";
-import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 
 class Match extends Component {
   state = {
@@ -116,8 +113,7 @@ class Match extends Component {
   };
 
   checkSetWin = (id) => {
-    const { setGames, setScore, currentSet, tieBreak, superTieBreak } =
-      this.state;
+    const { setGames, setScore, currentSet } = this.state;
     // O que ocorreu com a vitoria desse game?
     // Se ficou 6 games a 6:
     if (
@@ -148,7 +144,7 @@ class Match extends Component {
   };
 
   handleSetWin = (id) => {
-    const { setScore, gameOver, winner, names } = this.state;
+    const { setScore, winner } = this.state;
     let current = this.state.currentSet;
     let gOver = this.state.gameOver;
     const setSum = setScore[0].count + setScore[1].count;
@@ -203,19 +199,24 @@ class Match extends Component {
   };
 
   render() {
-    const inLineL = { textAlign: "right", display: "inline" };
     return (
-      <>
+      <div>
         <div>
-          <div style={inLineL}>{this.state.title}</div>
-          <div
-            style={{ textAlign: "right", marginLeft: 500, display: "inline" }}
-          >
-            {this.state.timer}
+          <div className="flex justify-center w-full p-2">
+            <div className="p-4 text-xl font-bold text-white bg-blue-500 rounded-md">
+              {this.state.title}
+            </div>
+          </div>
+
+          <div className="flex justify-center w-full">
+            <div className="p-3 text-white bg-green-800 rounded-md">
+              {this.state.timer}
+            </div>
           </div>
         </div>
 
-        <div style={inLineL}>{this.state.names[0]}</div>
+        <div className="flex justify-center w-full"></div>
+        <div className="inline text-right">{this.state.names[0]}</div>
         <Set
           setGames={this.state.setGames}
           currentSet={this.state.currentSet}
@@ -226,7 +227,7 @@ class Match extends Component {
           winner={this.state.winner}
         />
         <p></p>
-        <div style={inLineL}>{this.state.names[1]}</div>
+        <div className="inline text-right">{this.state.names[1]}</div>
         <Set
           setGames={this.state.setGames}
           currentSet={this.state.currentSet}
@@ -236,7 +237,7 @@ class Match extends Component {
           gameOver={this.state.gameOver}
           winner={this.state.winner}
         />
-      </>
+      </div>
     );
   }
 }

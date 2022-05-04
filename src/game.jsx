@@ -8,7 +8,7 @@ class Game extends Component {
     if (!this.props.gameOver) {
       elem = (
         <button
-          className="btn btn-primary btn-sm"
+          className="p-2 text-white bg-blue-600 rounded-md"
           style={{ textAlign: "right", display: "inline", marginLeft: 50 }}
           onClick={() => {
             this.props.onScore(this.props.game.id);
@@ -21,7 +21,7 @@ class Game extends Component {
       if (this.props.winner.id === this.props.id)
         elem = (
           <button
-            className="btn btn-success btn-sm"
+            className="p-2 text-white bg-green-600 rounded-md"
             style={{ textAlign: "right", display: "inline", marginLeft: 50 }}
           >
             Vencedor

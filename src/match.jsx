@@ -33,6 +33,7 @@ class Match extends Component {
     superTieBreak: false,
     gameOver: false,
     winner: { name: "", id: -1 },
+    firstTeam: 0,
   };
 
   resetGame = () => {
@@ -111,6 +112,7 @@ class Match extends Component {
       )
         this.resetGame();
     }
+    this.swapFirst();
   };
 
   checkSetWin = (id) => {
@@ -205,6 +207,22 @@ class Match extends Component {
     });
   };
 
+  displayFirst = (team) => {
+    if(this.state.firstTeam===team){
+      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+    }
+    else{
+      return ;
+    }
+  }
+  swapFirst = ()=>{
+    let firstTeam = this.state.firstTeam;
+    firstTeam = firstTeam===0?1:0
+    this.setState({
+      firstTeam
+    });
+  }
+
   render() {
     return (
       <div className="flex flex-col items-center justify-center p-1 py-4 m-5 space-y-4 bg-gray-100 border-2 border-gray-300 rounded-md">
@@ -223,6 +241,7 @@ class Match extends Component {
                   <td>
                     {/* BOLA DE TÊNIS */}
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                    {this.displayFirst(0)}
                   </td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
@@ -244,6 +263,7 @@ class Match extends Component {
                   <td>
                     {/* BOLA DE TÊNIS */}
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                    {this.displayFirst(1)}
                   </td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>

@@ -35,6 +35,7 @@ class Match extends Component {
     winner: { name: "", id: -1 },
     lastScore: -1,
     firstTeam: this.props.firstServe,
+    setsQuantity: this.props.setsQuantity,
   };
 
   resetGame = () => {
@@ -149,6 +150,12 @@ class Match extends Component {
 
   handleSetWin = (id) => {
     const { setScore, winner } = this.state;
+    if (this.state.setsQuantity === "1") {
+      winner.name = this.state.names[id];
+      winner.id = id;
+      this.setState({ gameOver: true, winner });
+    }
+
     let current = this.state.currentSet;
     let gOver = this.state.gameOver;
     const setSum = setScore[0].count + setScore[1].count;

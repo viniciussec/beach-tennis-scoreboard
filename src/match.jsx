@@ -253,9 +253,46 @@ class Match extends Component {
 
   swapFirst = () => {
     let firstTeam = this.state.firstTeam;
-    firstTeam = firstTeam === '1' ? '2' : '1';
+    firstTeam = firstTeam === "1" ? "2" : "1";
     this.setState({
       firstTeam,
+    });
+  };
+
+  resetMatch = () => {
+    this.setState({
+      names: [
+        "Fernando Trinta / Lincoln Rocha",
+        "João Paulo Pordeus / Paulo Rêgo",
+      ],
+      startChronometer: false,
+
+      // Placar dos Sets
+      setScore: [{ count: 0 }, { count: 0 }],
+
+      // Estado dos games de cada set
+      setGames: [
+        [{ count: 0 }, { count: 0 }],
+        [{ count: 0 }, { count: 0 }],
+        [{ count: 0 }, { count: 0 }],
+      ],
+
+      // Placar do game atual
+      game: [
+        { id: 0, count: 0 },
+        { id: 1, count: 0 },
+      ],
+
+      currentSet: 1,
+      addValue: 15,
+      pointsAheadNeeded: 15,
+      targetPoints: 45,
+      tieBreak: false,
+      superTieBreak: false,
+      gameOver: false,
+      winner: { name: "", id: -1 },
+      lastScore: -1,
+      firstTeam: this.props.firstServe,
     });
   };
 
@@ -274,7 +311,7 @@ class Match extends Component {
             <table>
               <tbody>
                 <tr className="border-b-2">
-                  <td>{this.displayFirst('1')}</td>
+                  <td>{this.displayFirst("1")}</td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
                   </td>
@@ -292,7 +329,7 @@ class Match extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td>{this.displayFirst('2')}</td>
+                  <td>{this.displayFirst("2")}</td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>
                   </td>
@@ -311,12 +348,18 @@ class Match extends Component {
                 </tr>
               </tbody>
             </table>
-            <div className="flex justify-center">
+            <div className="flex justify-center space-x-2">
               <button
                 className="p-2 text-white bg-blue-600 rounded-md "
                 onClick={this.handleUndoScore}
               >
                 Desfazer
+              </button>
+              <button
+                className="p-2 text-white bg-blue-600 rounded-md "
+                onClick={this.resetMatch}
+              >
+                Resetar
               </button>
             </div>
           </div>

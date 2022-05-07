@@ -6,7 +6,7 @@ class Form extends Component {
     description: "",
     firstTeam: ["", ""],
     secondTeam: ["", ""],
-    firstServe: 1,
+    firstServe: '1',
     setsQuantity: "3",
     hasSupertiebreak: true,
     matchStarted: false,

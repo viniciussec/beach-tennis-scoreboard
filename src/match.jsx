@@ -34,6 +34,7 @@ class Match extends Component {
     gameOver: false,
     winner: { name: "", id: -1 },
     lastScore: -1,
+    firstTeam: 0,
   };
 
   resetGame = () => {
@@ -112,6 +113,7 @@ class Match extends Component {
       )
         this.resetGame();
     }
+    this.swapFirst();
   };
 
   checkSetWin = (id) => {
@@ -223,12 +225,14 @@ class Match extends Component {
     
     this.setState({lastScore:-1});
   };
+  
   undoGameScore = (lastScore)=>{
     const game = [...this.state.game];
     
     game[lastScore].count -= this.state.addValue;
     this.setState({ game });
   }
+  
   undoSetScore = (lastScore, set)=>{
     if(this.state.setGames[set][lastScore].count<=0){
       this.undoSetScore(lastScore, set-1);
@@ -238,6 +242,21 @@ class Match extends Component {
     setGames[set][lastScore].count--;
 
     this.setState({setGames})
+  displayFirst = (team) => {
+    if(this.state.firstTeam===team){
+      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+    }
+    else{
+      return ;
+    }
+  }
+  swapFirst = ()=>{
+    let firstTeam = this.state.firstTeam;
+    firstTeam = firstTeam===0?1:0
+    this.setState({
+      firstTeam
+    });
+
   }
 
   render() {
@@ -258,6 +277,7 @@ class Match extends Component {
                   <td>
                     {/* BOLA DE TÊNIS */}
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                    {this.displayFirst(0)}
                   </td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
@@ -279,6 +299,7 @@ class Match extends Component {
                   <td>
                     {/* BOLA DE TÊNIS */}
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
+                    {this.displayFirst(1)}
                   </td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>

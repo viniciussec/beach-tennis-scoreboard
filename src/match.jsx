@@ -14,7 +14,7 @@ class Match extends Component {
 
     // Estado dos games de cada set
     setGames: [
-      [{ count: 6 }, { count: 5 }],
+      [{ count: 0 }, { count: 0 }],
       [{ count: 0 }, { count: 0 }],
       [{ count: 0 }, { count: 0 }],
     ],
@@ -52,7 +52,7 @@ class Match extends Component {
     id === 0
       ? (game[0].count += this.state.addValue)
       : (game[1].count += this.state.addValue);
-    this.setState({ game, lastScore:id });
+    this.setState({ game, lastScore: id });
     this.checkGameWin(id);
   };
 
@@ -213,51 +213,51 @@ class Match extends Component {
       void 0;
     }
     const lastScore = this.state.lastScore;
-    if(lastScore===-1){
+    if (lastScore === -1) {
       return;
     }
-    if(this.state.game[lastScore].count>0){
+    if (this.state.game[lastScore].count > 0) {
       this.undoGameScore(lastScore);
-    }
-    else{
+    } else {
       this.undoSetScore(lastScore, this.state.currentSet);
     }
-    
-    this.setState({lastScore:-1});
+
+    this.setState({ lastScore: -1 });
   };
-  
-  undoGameScore = (lastScore)=>{
+
+  undoGameScore = (lastScore) => {
     const game = [...this.state.game];
-    
+
     game[lastScore].count -= this.state.addValue;
     this.setState({ game });
-  }
-  
-  undoSetScore = (lastScore, set)=>{
-    if(this.state.setGames[set][lastScore].count<=0){
-      this.undoSetScore(lastScore, set-1);
+  };
+
+  undoSetScore = (lastScore, set) => {
+    if (this.state.setGames[set][lastScore].count <= 0) {
+      this.undoSetScore(lastScore, set - 1);
       return;
     }
-    let setGames = [...this.state.setGames]
+    let setGames = [...this.state.setGames];
     setGames[set][lastScore].count--;
 
-    this.setState({setGames})
-  displayFirst = (team) => {
-    if(this.state.firstTeam===team){
-      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-    }
-    else{
-      return ;
-    }
-  }
-  swapFirst = ()=>{
-    let firstTeam = this.state.firstTeam;
-    firstTeam = firstTeam===0?1:0
-    this.setState({
-      firstTeam
-    });
+    this.setState({ setGames });
+  };
 
-  }
+  displayFirst = (team) => {
+    if (this.state.firstTeam === team) {
+      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>;
+    } else {
+      return;
+    }
+  };
+
+  swapFirst = () => {
+    let firstTeam = this.state.firstTeam;
+    firstTeam = firstTeam === 0 ? 1 : 0;
+    this.setState({
+      firstTeam,
+    });
+  };
 
   render() {
     return (
@@ -319,10 +319,14 @@ class Match extends Component {
                 </tr>
               </tbody>
             </table>
-            <button className="p-2 text-white bg-blue-600 rounded-md"
-              onClick={this.handleUndoScore}>
-              undo
-            </button>
+            <div className="flex justify-center">
+              <button
+                className="p-2 text-white bg-blue-600 rounded-md "
+                onClick={this.handleUndoScore}
+              >
+                Desfazer
+              </button>
+            </div>
           </div>
         </div>
       </div>

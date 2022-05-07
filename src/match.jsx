@@ -3,8 +3,6 @@ import Set from "./set";
 import Chronometer from "./chronometer";
 class Match extends Component {
   state = {
-    title: "Open DC de Beach Tennis",
-    // Placeholder temporario para o timer:
     names: [
       "Fernando Trinta / Lincoln Rocha",
       "João Paulo Pordeus / Paulo Rêgo",
@@ -211,7 +209,7 @@ class Match extends Component {
     return (
       <div className="flex flex-col items-center justify-center p-1 py-4 m-5 space-y-4 bg-gray-100 border-2 border-gray-300 rounded-md">
         <div className="p-4 text-xl font-bold text-white bg-blue-500 border-2 border-white rounded-md drop-shadow-md">
-          {this.state.title}
+          {this.props.description}
         </div>
         <Chronometer
           start={this.state.startChronometer && !this.state.gameOver}
@@ -227,7 +225,7 @@ class Match extends Component {
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
                   </td>
                   <td className="p-2 ">
-                    <div className="">{this.state.names[0]}</div>
+                    <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
                   </td>
                   <td className="p-2">
                     <Set
@@ -248,7 +246,7 @@ class Match extends Component {
                     {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
                   </td>
                   <td className="p-2">
-                    <div className="">{this.state.names[1]}</div>
+                    <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>
                   </td>
                   <td className="p-2">
                     <Set

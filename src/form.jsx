@@ -132,7 +132,14 @@ class Form extends Component {
         </form>
       </div>
     ) : (
-      <Match />
+      <Match
+        description={this.state.description}
+        firstTeam={this.state.firstTeam}
+        secondTeam={this.state.secondTeam}
+        firstServe={this.state.firstServe}
+        setsQuantity={this.state.setsQuantity}
+        hasSupertiebreak={this.state.hasSupertiebreak}
+      />
     );
   }
 }

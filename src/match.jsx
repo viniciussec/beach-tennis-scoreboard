@@ -274,11 +274,7 @@ class Match extends Component {
             <table>
               <tbody>
                 <tr className="border-b-2">
-                  <td>
-                    {/* BOLA DE TÊNIS */}
-                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
-                    {this.displayFirst(0)}
-                  </td>
+                  <td>{this.displayFirst(0)}</td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
                   </td>
@@ -296,11 +292,7 @@ class Match extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    {/* BOLA DE TÊNIS */}
-                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
-                    {this.displayFirst(1)}
-                  </td>
+                  <td>{this.displayFirst(1)}</td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>
                   </td>

@@ -7,7 +7,7 @@ class Form extends Component {
     firstTeam: ["", ""],
     secondTeam: ["", ""],
     firstServe: 1,
-    setsQuantity: 3,
+    setsQuantity: "3",
     hasSupertiebreak: true,
     matchStarted: false,
   };
@@ -94,7 +94,10 @@ class Form extends Component {
             <label>Quantidade de sets</label>
             <select
               value={this.state.setsQuantity}
-              onChange={(e) => this.setState({ setsQuantity: e.target.value })}
+              onChange={(e) => {
+                this.setState({ setsQuantity: e.target.value });
+                console.log(typeof e.target.value);
+              }}
               className="p-3 bg-white rounded-md"
               name=""
               id=""
@@ -103,7 +106,7 @@ class Form extends Component {
               <option value={3}>Melhor de 3</option>
             </select>
           </div>
-          {(this.state.setsQuantity === "3") && (
+          {this.state.setsQuantity === "3" && (
             <div className="flex flex-col space-y-2">
               <label>O último set será em modo supertiebrake?</label>
               <select

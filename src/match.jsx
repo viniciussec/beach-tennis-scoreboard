@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import Set from "./set";
-
+import Chronometer from "./chronometer";
 class Match extends Component {
   state = {
     title: "Open DC de Beach Tennis",
     // Placeholder temporario para o timer:
-    timer: "00:00:00",
     names: [
       "Fernando Trinta / Lincoln Rocha",
       "João Paulo Pordeus / Paulo Rêgo",
     ],
+    startChronometer: false,
 
     // Placar dos Sets
     setScore: [{ count: 0 }, { count: 0 }],
@@ -207,10 +207,8 @@ class Match extends Component {
         <div className="p-4 text-xl font-bold text-white bg-blue-500 border-2 border-white rounded-md drop-shadow-md">
           {this.state.title}
         </div>
+        <Chronometer start={this.state.startChronometer} />
 
-        <div className="p-3 text-white bg-green-800 border border-white rounded-md drop-shadow-md">
-          {this.state.timer}
-        </div>
         <div>
           <div className="p-4 bg-white border-2 border-gray-300 rounded-md drop-shadow-md">
             <table>

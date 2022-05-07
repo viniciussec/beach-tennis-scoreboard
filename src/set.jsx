@@ -24,6 +24,7 @@ class Set extends Component {
           gameOver={this.props.gameOver}
           id={this.props.id}
           winner={this.props.winner}
+          setChronometer={this.props.setChronometer}
         />
       </div>
     );

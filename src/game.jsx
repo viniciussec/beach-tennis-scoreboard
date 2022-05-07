@@ -3,6 +3,12 @@ import React, { Component } from "react";
 class Game extends Component {
   state = {};
 
+  componentDidMount() {
+    if (this.props.winner.id === this.props.id) {
+      this.props.setChronometer(false);
+    }
+  }
+
   render() {
     let elem;
     if (!this.props.gameOver) {
@@ -12,6 +18,7 @@ class Game extends Component {
           style={{ textAlign: "right", display: "inline", marginLeft: 50 }}
           onClick={() => {
             this.props.onScore(this.props.game.id);
+            this.props.setChronometer(true);
           }}
         >
           Pontuar

@@ -33,6 +33,7 @@ class Match extends Component {
     superTieBreak: false,
     gameOver: false,
     winner: { name: "", id: -1 },
+    lastScore: -1,
     firstTeam: 0,
   };
 
@@ -51,7 +52,7 @@ class Match extends Component {
     id === 0
       ? (game[0].count += this.state.addValue)
       : (game[1].count += this.state.addValue);
-    this.setState({ game });
+    this.setState({ game, lastScore: id });
     this.checkGameWin(id);
   };
 
@@ -207,21 +208,56 @@ class Match extends Component {
     });
   };
 
+  handleUndoScore = () => {
+    if (this.state.gameOver) {
+      void 0;
+    }
+    const lastScore = this.state.lastScore;
+    if (lastScore === -1) {
+      return;
+    }
+    if (this.state.game[lastScore].count > 0) {
+      this.undoGameScore(lastScore);
+    } else {
+      this.undoSetScore(lastScore, this.state.currentSet);
+    }
+
+    this.setState({ lastScore: -1 });
+  };
+
+  undoGameScore = (lastScore) => {
+    const game = [...this.state.game];
+
+    game[lastScore].count -= this.state.addValue;
+    this.setState({ game });
+  };
+
+  undoSetScore = (lastScore, set) => {
+    if (this.state.setGames[set][lastScore].count <= 0) {
+      this.undoSetScore(lastScore, set - 1);
+      return;
+    }
+    let setGames = [...this.state.setGames];
+    setGames[set][lastScore].count--;
+
+    this.setState({ setGames });
+  };
+
   displayFirst = (team) => {
-    if(this.state.firstTeam===team){
-      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+    if (this.state.firstTeam === team) {
+      return <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>;
+    } else {
+      return;
     }
-    else{
-      return ;
-    }
-  }
-  swapFirst = ()=>{
+  };
+
+  swapFirst = () => {
     let firstTeam = this.state.firstTeam;
-    firstTeam = firstTeam===0?1:0
+    firstTeam = firstTeam === 0 ? 1 : 0;
     this.setState({
-      firstTeam
+      firstTeam,
     });
-  }
+  };
 
   render() {
     return (
@@ -238,11 +274,7 @@ class Match extends Component {
             <table>
               <tbody>
                 <tr className="border-b-2">
-                  <td>
-                    {/* BOLA DE TÊNIS */}
-                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
-                    {this.displayFirst(0)}
-                  </td>
+                  <td>{this.displayFirst(0)}</td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
                   </td>
@@ -260,11 +292,7 @@ class Match extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td>
-                    {/* BOLA DE TÊNIS */}
-                    {/* <div className="w-3 h-3 bg-yellow-500 rounded-full"></div> */}
-                    {this.displayFirst(1)}
-                  </td>
+                  <td>{this.displayFirst(1)}</td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>
                   </td>
@@ -283,6 +311,14 @@ class Match extends Component {
                 </tr>
               </tbody>
             </table>
+            <div className="flex justify-center">
+              <button
+                className="p-2 text-white bg-blue-600 rounded-md "
+                onClick={this.handleUndoScore}
+              >
+                Desfazer
+              </button>
+            </div>
           </div>
         </div>
       </div>

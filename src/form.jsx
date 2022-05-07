@@ -103,21 +103,23 @@ class Form extends Component {
               <option value={3}>Melhor de 3</option>
             </select>
           </div>
-          <div className="flex flex-col space-y-2">
-            <label>O último set será em modo supertiebrake?</label>
-            <select
-              value={this.state.hasSupertiebreak}
-              onChange={(e) =>
-                this.setState({ hasSupertiebreak: e.target.value })
-              }
-              className="p-3 bg-white rounded-md"
-              name=""
-              id=""
-            >
-              <option value={true}>Sim</option>
-              <option value={false}>Não</option>
-            </select>
-          </div>
+          {(this.state.setsQuantity === "3") && (
+            <div className="flex flex-col space-y-2">
+              <label>O último set será em modo supertiebrake?</label>
+              <select
+                value={this.state.hasSupertiebreak}
+                onChange={(e) =>
+                  this.setState({ hasSupertiebreak: e.target.value })
+                }
+                className="p-3 bg-white rounded-md"
+                name=""
+                id=""
+              >
+                <option value={true}>Sim</option>
+                <option value={false}>Não</option>
+              </select>
+            </div>
+          )}
           <div className="flex justify-center col-span-2">
             <button
               onClick={(e) => {

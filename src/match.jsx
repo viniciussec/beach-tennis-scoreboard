@@ -14,7 +14,7 @@ class Match extends Component {
 
     // Estado dos games de cada set
     setGames: [
-      [{ count: 0 }, { count: 0 }],
+      [{ count: 6 }, { count: 5 }],
       [{ count: 0 }, { count: 0 }],
       [{ count: 0 }, { count: 0 }],
     ],
@@ -33,6 +33,7 @@ class Match extends Component {
     superTieBreak: false,
     gameOver: false,
     winner: { name: "", id: -1 },
+    lastScore: -1,
   };
 
   resetGame = () => {
@@ -50,7 +51,7 @@ class Match extends Component {
     id === 0
       ? (game[0].count += this.state.addValue)
       : (game[1].count += this.state.addValue);
-    this.setState({ game });
+    this.setState({ game, lastScore:id });
     this.checkGameWin(id);
   };
 
@@ -205,6 +206,40 @@ class Match extends Component {
     });
   };
 
+  handleUndoScore = () => {
+    if (this.state.gameOver) {
+      void 0;
+    }
+    const lastScore = this.state.lastScore;
+    if(lastScore===-1){
+      return;
+    }
+    if(this.state.game[lastScore].count>0){
+      this.undoGameScore(lastScore);
+    }
+    else{
+      this.undoSetScore(lastScore, this.state.currentSet);
+    }
+    
+    this.setState({lastScore:-1});
+  };
+  undoGameScore = (lastScore)=>{
+    const game = [...this.state.game];
+    
+    game[lastScore].count -= this.state.addValue;
+    this.setState({ game });
+  }
+  undoSetScore = (lastScore, set)=>{
+    if(this.state.setGames[set][lastScore].count<=0){
+      this.undoSetScore(lastScore, set-1);
+      return;
+    }
+    let setGames = [...this.state.setGames]
+    setGames[set][lastScore].count--;
+
+    this.setState({setGames})
+  }
+
   render() {
     return (
       <div className="flex flex-col items-center justify-center p-1 py-4 m-5 space-y-4 bg-gray-100 border-2 border-gray-300 rounded-md">
@@ -263,6 +298,10 @@ class Match extends Component {
                 </tr>
               </tbody>
             </table>
+            <button className="p-2 text-white bg-blue-600 rounded-md"
+              onClick={this.handleUndoScore}>
+              undo
+            </button>
           </div>
         </div>
       </div>

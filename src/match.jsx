@@ -34,7 +34,7 @@ class Match extends Component {
     gameOver: false,
     winner: { name: "", id: -1 },
     lastScore: -1,
-    firstTeam: 0,
+    firstTeam: this.props.firstServe,
   };
 
   resetGame = () => {
@@ -253,7 +253,7 @@ class Match extends Component {
 
   swapFirst = () => {
     let firstTeam = this.state.firstTeam;
-    firstTeam = firstTeam === 0 ? 1 : 0;
+    firstTeam = firstTeam === '1' ? '2' : '1';
     this.setState({
       firstTeam,
     });
@@ -274,7 +274,7 @@ class Match extends Component {
             <table>
               <tbody>
                 <tr className="border-b-2">
-                  <td>{this.displayFirst(0)}</td>
+                  <td>{this.displayFirst('1')}</td>
                   <td className="p-2 ">
                     <div className="">{`${this.props.firstTeam[0]} / ${this.props.firstTeam[1]}`}</div>
                   </td>
@@ -292,7 +292,7 @@ class Match extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <td>{this.displayFirst(1)}</td>
+                  <td>{this.displayFirst('2')}</td>
                   <td className="p-2">
                     <div className="">{`${this.props.secondTeam[0]} / ${this.props.secondTeam[1]}`}</div>
                   </td>

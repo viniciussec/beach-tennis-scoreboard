@@ -47,7 +47,7 @@ class Game extends Component {
     return (
       <>
         <div style={{ textAlign: "right", display: "inline" }}>
-          {this.props.game.count}
+          {this.props.game.count===45?40:this.props.game.count}
         </div>
         {elem}
       </>

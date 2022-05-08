@@ -28,7 +28,7 @@ class Match extends Component {
     currentSet: 1,
     addValue: 15,
     pointsAheadNeeded: 15,
-    targetPoints: 45,
+    targetPoints: 60,
     tieBreak: false,
     superTieBreak: false,
     gameOver: false,
@@ -212,7 +212,7 @@ class Match extends Component {
   beginNormalSet = () => {
     this.setState({
       addValue: 15,
-      targetPoints: 45,
+      targetPoints: 60,
       pointsAheadNeeded: 15,
       superTieBreak: false,
       tieBreak: false,
@@ -303,7 +303,7 @@ class Match extends Component {
       currentSet: 1,
       addValue: 15,
       pointsAheadNeeded: 15,
-      targetPoints: 45,
+      targetPoints: 60,
       tieBreak: false,
       superTieBreak: false,
       gameOver: false,

@@ -6,9 +6,9 @@ class Form extends Component {
     description: "",
     firstTeam: ["", ""],
     secondTeam: ["", ""],
-    firstServe: '1',
+    firstServe: "1",
     setsQuantity: "3",
-    hasSupertiebreak: true,
+    hasSupertiebreak: 'true',
     matchStarted: false,
   };
 
@@ -111,9 +111,10 @@ class Form extends Component {
               <label>O último set será em modo supertiebrake?</label>
               <select
                 value={this.state.hasSupertiebreak}
-                onChange={(e) =>
-                  this.setState({ hasSupertiebreak: e.target.value })
-                }
+                onChange={(e) => {
+                  this.setState({ hasSupertiebreak: e.target.value });
+                  console.log( e.target.value);
+                }}
                 className="p-3 bg-white rounded-md"
                 name=""
                 id=""

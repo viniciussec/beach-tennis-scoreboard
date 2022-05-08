@@ -17,6 +17,12 @@ class Set extends Component {
             {this.props.setGames[1][this.props.id].count}
           </div>
         )}
+        {this.props.currentSet >= 3 &&
+          this.props.hasSupertiebreak === "false" && (
+            <div className="mx-4">
+              {this.props.setGames[2][this.props.id].count}
+            </div>
+          )}
 
         <Game
           game={this.props.game}

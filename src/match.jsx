@@ -35,6 +35,8 @@ class Match extends Component {
     winner: { name: "", id: -1 },
     lastScore: -1,
     firstTeam: this.props.firstServe,
+    setsQuantity: this.props.setsQuantity,
+    isFinalSet: false,
   };
 
   resetGame = () => {
@@ -149,6 +151,12 @@ class Match extends Component {
 
   handleSetWin = (id) => {
     const { setScore, winner } = this.state;
+    if (this.state.setsQuantity === "1") {
+      winner.name = this.state.names[id];
+      winner.id = id;
+      this.setState({ gameOver: true, winner });
+    }
+
     let current = this.state.currentSet;
     let gOver = this.state.gameOver;
     const setSum = setScore[0].count + setScore[1].count;
@@ -157,8 +165,8 @@ class Match extends Component {
     }
     // Dois sets a zero, game over:
     else if (
-      setSum === 2 &&
-      (setScore[0].count === 0 || setScore[1].count === 0)
+      (setSum === 2 && (setScore[0].count === 0 || setScore[1].count === 0)) ||
+      this.state.isFinalSet === true
     ) {
       gOver = true;
       winner.name = this.state.names[id];
@@ -167,7 +175,16 @@ class Match extends Component {
     }
     // Se chegamos aqui, esta de 1x1
     else {
-      this.beginSuperTieBreak();
+      if (this.props.hasSupertiebreak === "true") {
+        this.beginSuperTieBreak();
+      } else {
+        console.log(this.props.hasSupertiebreak);
+        this.setState({
+          isFinalSet: true,
+        });
+        this.beginNormalSet();
+      }
+      // this.beginSuperTieBreak();
     }
 
     current++;
@@ -325,6 +342,7 @@ class Match extends Component {
                       gameOver={this.state.gameOver}
                       winner={this.state.winner}
                       setChronometer={this.setChronometer}
+                      hasSupertiebreak={this.props.hasSupertiebreak}
                     />
                   </td>
                 </tr>
@@ -343,6 +361,7 @@ class Match extends Component {
                       gameOver={this.state.gameOver}
                       winner={this.state.winner}
                       setChronometer={this.setChronometer}
+                      hasSupertiebreak={this.props.hasSupertiebreak}
                     />
                   </td>
                 </tr>
